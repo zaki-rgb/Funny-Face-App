@@ -1,0 +1,243 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(158, 158, 255);
+}
+
+.face { /*the face[default]*/
+    background-color: orange;
+    border-radius: 50%;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    border: 10px solid black;
+    cursor: pointer;
+}
+
+.face.angry{
+    background-color: red;
+    border-color: darkred
+}
+/*animation*/
+@keyframes shake {
+    0% { transform: translate(0px, 0px); }
+    20% { transform: translate(-10px, 0px); }
+    40% { transform: translate(10px, 0px); }
+    60% { transform: translate(-10px, 0px); }
+    80% { transform: translate(10px, 0px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+.face.peek {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -300px; /* fully hidden below screen */
+    animation: peekUp 1s ease forwards; /* animate to half visible */
+}
+
+@keyframes peekUp {
+    0% { bottom: -300px; }   /* fully off-screen */
+    100% { bottom: -150px; } /* half the face visible */
+}
+
+
+.face.sad{
+    background-color: blue;
+    border-color: darkblue;
+}
+
+.face.light{
+    background-color: black;
+    border-color: black;
+}
+.face.disgust{
+    background-color: rgb(33, 217, 33);
+    border-color: green;
+}
+
+.face::before { /*the mouth*/
+    content: "";
+    top: 180px;
+    position: absolute;
+    width: 150px;
+    height: 70px;
+    background: blue;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    transition: 0.5s;
+}
+
+.face.angry::before {
+    background: darkred;
+    border-top-left-radius: 100px; /*higher equal more frown*/
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.face.angry::after {
+    content: "";
+    top: 70px;
+    position: absolute;
+    width: 200px;
+    height: 20px;
+    background: black;
+}
+.face.sad::before {
+    background: darkblue;
+    border-top-left-radius: 100px; /*higher equal more frown*/
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.face.sad::after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+    border: 20px solid black;
+    border-color: black transparent transparent transparent; /* only top edge */
+    border-radius: 70%;
+}
+
+.face.light::before {
+    background: white;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+}
+.face.disgust::before{
+    content: "";
+    position: absolute;
+    height: 80px;
+    width: 200px;
+    border-top-left-radius: 80px; /*higher equal more frown*/
+    border-top-right-radius: 80px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: rgb(3, 135, 9);
+}
+
+.face.disgust::after{
+    content: "";
+    position: absolute;
+    top: 200px;
+    width: 60px;
+    height: 80px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    background: rgb(255, 0, 0);
+    border: 5px solid darkred;
+}
+.face.disgust .extra-part{
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+    border: 20px solid black;
+    border-color: black transparent transparent transparent; /* only top edge */
+    border-radius: 70%;
+}
+
+.eyes { /*where the eye is*/
+    position: relative;
+    top: -40px;
+    display: flex;
+}
+
+.eyes .eye { /*white part of the eye*/
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: block;
+    background: white;
+    border-radius: 50%;
+    margin: 0 15px; /*seperation between the eyes in the middle*/
+}
+
+.eyes .eye::before {
+    content: "";
+    position:absolute;
+    top: 50%;
+    left: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: black;
+    transform: translate(-50%, -50%);
+    
+}
+
+button {
+    position: fixed;
+    left: 20px;
+    border-radius: 10px;
+    height: 80px;
+    width: 120px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    color: white;
+}
+
+/* Individual button colors/positions */
+button.angry { top:10px; background-color: red; }
+button.sad   { top: 100px; background-color: blue; }
+button.light { top: 200px; background-color: beige; color: black; }
+button.disgust { top: 300px; background-color: rgb(0, 212, 0);}
+button.happy{ top: 400px; background-color: yellow;}
+button.peek { top: 500px; background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1); }
+
+button.angry:hover {
+    transform:scale(1.1);
+    background-color: darkred;
+    transition: 0.5s;
+}
+
+button.sad:hover {
+    transform: scale(1.1);
+    background-color: darkblue;
+    transition: 0.5s;
+}
+
+button.light:hover {
+    transform: scale(1.1);
+    background-color: black;
+    color: white;
+    transition: 0.5s;
+}
+button.disgust:hover {
+    transform: scale(1.1);
+    background-color: green;
+    transition: 0.5s;
+}
+button.happy:hover {
+    transform: scale(1.1);
+    background-color: rgb(241, 238, 59);
+    transition: 0.5s;
+    color: black;
+}
+button.peek:hover{
+    transform: scale(1.1);
+    background-color: black;
+    transition: 0.5s;
+}
